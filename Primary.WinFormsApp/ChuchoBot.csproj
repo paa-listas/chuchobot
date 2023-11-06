@@ -209,6 +209,7 @@
     <Compile Include="SettlementTerms\Settlement.cs" />
     <Compile Include="SettlementTerms\SettlementArbitrationDataTable.cs" />
     <Compile Include="SettlementTerms\SettlementTermArbitrationProcessor.cs" />
+    <Compile Include="Shared\Paa.cs" />
     <Compile Include="Shared\StringExtensions.cs" />
     <Compile Include="Shared\TradedInstrumentWithSettlementTerms.cs" />
     <Compile Include="Shared\TradeExtensions.cs" />

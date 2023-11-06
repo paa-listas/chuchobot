@@ -34,7 +34,7 @@ namespace Primary.WinFormsApp
             OwnedCompraPriceAutoUpdate = true;
             ArbitrationCompraPriceAutoUpdate = true;
             ArbitrationVentaPriceAutoUpdate = true;
-
+            
             timer1_Tick(sender, e);
         }
 
@@ -270,7 +270,7 @@ namespace Primary.WinFormsApp
         private void OwnedVentaBidsOffers_ClickSize(object sender, BidOffersEventArgs e)
         {
             SizeAutoUpdate = e.ClickType == BidsOffersClickType.TopBid;
-
+            
             numOwnedVentaSize.Value = e.Value;
         }
 
@@ -527,29 +527,37 @@ namespace Primary.WinFormsApp
             CalculateOwnedCompraSize();
         }
 
-        private void txtOwnedVenta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private async void txtOwnedVenta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Clipboard.SetText(txtOwnedVenta.Text);
+            Clipboard.SetText("1 - " + txtOwnedVenta.Text);
+            _ = $"1) VENDER {numOwnedVentaSize.Value:#,##0} nominales de {_trade.SellThenBuy.Sell.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.SellThenBuy.Sell.Instrument.FormatPrice(numOwnedVentaPrice.Value)}";
+            string orden = await Paa.ShowComoVenderOrden(_trade.SellThenBuy.Sell.Instrument, numOwnedVentaSize.Value, numOwnedVentaPrice.Value);
         }
 
-        private void txtArbitrationCompra_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private async void txtArbitrationCompra_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Clipboard.SetText(txtArbitrationCompra.Text);
+            Clipboard.SetText("2 - " + txtArbitrationCompra.Text);
+            _ = $"2) COMPRAR {numArbitrationCompraSize.Value:#,##0} nominales de {_trade.BuyThenSell.Sell.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.BuyThenSell.Sell.Instrument.FormatPrice(numArbitrationCompraPrice.Value)}";
+            string orden = await Paa.ShowComoComprarOrden(_trade.BuyThenSell.Sell.Instrument, numArbitrationCompraSize.Value, numArbitrationCompraPrice.Value);
         }
 
-        private void txtArbitrationVenta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private async void txtArbitrationVenta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Clipboard.SetText(txtArbitrationVenta.Text);
+            Clipboard.SetText("3 - " + txtArbitrationVenta.Text);
+            _ = $"3) VENDER {numArbitrationVentaSize.Value:#,##0} nominales de {_trade.BuyThenSell.Buy.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.BuyThenSell.Buy.Instrument.FormatPrice(numArbitrationVentaPrice.Value)}";
+            string orden = await Paa.ShowComoVenderOrden(_trade.BuyThenSell.Buy.Instrument, numArbitrationVentaSize.Value, numArbitrationVentaPrice.Value);
         }
 
-        private void txtOwnedCompra_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private async void txtOwnedCompra_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Clipboard.SetText(txtOwnedCompra.Text);
+            Clipboard.SetText("4 - " + txtOwnedCompra.Text);
+            _ = $"4) COMPRAR {numOwnedCompraSize.Value:#,##0} nominales de {_trade.SellThenBuy.Buy.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.SellThenBuy.Buy.Instrument.FormatPrice(numOwnedCompraPrice.Value)}";
+            string orden = await Paa.ShowComoComprarOrden(_trade.SellThenBuy.Buy.Instrument, numOwnedCompraSize.Value, numOwnedCompraPrice.Value);
         }
 
         private void lnkArbitration_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Clipboard.SetText(lnkArbitration.Text);
+            Clipboard.SetText("1,2,3,4 - " + lnkArbitration.Text);
         }
 
         private void numDolar_ValueChanged(object sender, EventArgs e)
