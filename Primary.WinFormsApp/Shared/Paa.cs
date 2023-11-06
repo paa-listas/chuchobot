@@ -17,14 +17,18 @@ namespace Primary.WinFormsApp
         {
             string orden = $"VENDER {nominales:#,##0} nominales de {instrument.InstrumentId.SymbolWithoutPrefix()} a {precio}";
             MessageBox.Show(orden, "Operar esto:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return Task.Run(() => orden);
+            
+            // https://stackoverflow.com/a/39525992
+            return Task.FromResult(orden);
         }
 
         internal static Task<string> ShowComoVenderOrden(InstrumentDetail instrument, decimal nominales, decimal precio)
         {
             string orden = $"COMPRAR {nominales:#,##0} nominales de {instrument.InstrumentId.SymbolWithoutPrefix()} a {precio}";
             MessageBox.Show(orden, "Operar esto:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return Task.Run(() => orden);
+            
+            // https://stackoverflow.com/a/39525992
+            return Task.FromResult(orden);
         }
     }
 }
