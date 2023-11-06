@@ -266,7 +266,7 @@ namespace Primary.WinFormsApp
             var dif = DateTime.Now - _lastUpdate;
 
             var connected = dif.TotalSeconds < 15;
-
+            connected = true; // No nos importa por el momento verificar la conexion. En ciertos entornos queda en desconectado y no lo está. Usamos este parche para resolver eso.
             SetConnectionStatus(connected);
             if (connected)
             {
