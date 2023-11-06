@@ -30,7 +30,7 @@ namespace Primary.WinFormsApp
             numComision.Value = Properties.Settings.Default.Comision;
 
             OwnedVentaPriceAutoUpdate = true;
-            SizeAutoUpdate = true;
+            SizeAutoUpdate = false;
             OwnedCompraPriceAutoUpdate = true;
             ArbitrationCompraPriceAutoUpdate = true;
             ArbitrationVentaPriceAutoUpdate = true;
@@ -306,22 +306,22 @@ namespace Primary.WinFormsApp
 
         public void CompleteOwnedVenta()
         {
-            txtOwnedVenta.Text = $"VENDER {numOwnedVentaSize.Value:#,##0} nominales de {_trade.SellThenBuy.Sell.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.SellThenBuy.Sell.Instrument.FormatPrice(numOwnedVentaPrice.Value)}";
+            txtOwnedVenta.Text = $"1) VENDER {numOwnedVentaSize.Value:#,##0} nominales de {_trade.SellThenBuy.Sell.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.SellThenBuy.Sell.Instrument.FormatPrice(numOwnedVentaPrice.Value)}";
         }
 
         public void CompleteOwnedCompra()
         {
-            txtOwnedCompra.Text = $"COMPRAR {numOwnedCompraSize.Value:#,##0} nominales de {_trade.SellThenBuy.Buy.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.SellThenBuy.Buy.Instrument.FormatPrice(numOwnedCompraPrice.Value)}";
+            txtOwnedCompra.Text = $"4) COMPRAR {numOwnedCompraSize.Value:#,##0} nominales de {_trade.SellThenBuy.Buy.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.SellThenBuy.Buy.Instrument.FormatPrice(numOwnedCompraPrice.Value)}";
         }
 
         public void CompleteArbitrationVenta()
         {
-            txtArbitrationVenta.Text = $"VENDER {numArbitrationVentaSize.Value:#,##0} nominales de {_trade.BuyThenSell.Buy.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.BuyThenSell.Buy.Instrument.FormatPrice(numArbitrationVentaPrice.Value)}";
+            txtArbitrationVenta.Text = $"3) VENDER {numArbitrationVentaSize.Value:#,##0} nominales de {_trade.BuyThenSell.Buy.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.BuyThenSell.Buy.Instrument.FormatPrice(numArbitrationVentaPrice.Value)}";
         }
 
         public void CompleteArbitrationCompra()
         {
-            txtArbitrationCompra.Text = $"COMPRAR {numArbitrationCompraSize.Value:#,##0} nominales de {_trade.BuyThenSell.Sell.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.BuyThenSell.Sell.Instrument.FormatPrice(numArbitrationCompraPrice.Value)}";
+            txtArbitrationCompra.Text = $"2) COMPRAR {numArbitrationCompraSize.Value:#,##0} nominales de {_trade.BuyThenSell.Sell.Instrument.InstrumentId.SymbolWithoutPrefix()} a {_trade.BuyThenSell.Sell.Instrument.FormatPrice(numArbitrationCompraPrice.Value)}";
         }
 
         public void CalculateOwnedVenta()
