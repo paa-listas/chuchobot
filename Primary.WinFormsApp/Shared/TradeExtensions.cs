@@ -76,9 +76,9 @@ namespace Primary.WinFormsApp
 
         public static decimal Variation(this Entries entries)
         {
-            if (entries.Close != null && entries.Close.Price.HasValue && entries.Last != null && entries.Last.Price.HasValue)
+            if (entries.Close != null && entries.Close.Price.HasValue && entries.Last != null && entries.Last.Price.HasValue && entries.Close.Price.Value > 0)
             {
-                return entries.Last.Price.Value / entries.Close.Price.Value - 1m; 
+                return entries.Last.Price.Value / entries.Close.Price.Value - 1m;
             }
 
             return default;
