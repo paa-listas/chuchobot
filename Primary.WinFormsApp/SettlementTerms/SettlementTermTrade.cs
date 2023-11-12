@@ -1,5 +1,6 @@
 ﻿using Primary.Data;
 using System;
+using System.Diagnostics;
 
 namespace Primary.WinFormsApp
 {
@@ -27,6 +28,7 @@ namespace Primary.WinFormsApp
 
 
         public decimal ProfitLoss { get; private set; } // => EsColocadora ? SellTotalNeto - BuyTotalNeto + InteresNeto : SellTotalNeto - BuyTotalNeto - InteresNeto;
+        public decimal ProfitLossPercentage { get; private set; }
 
         public decimal SellSize { get; private set; }
         public decimal BuySize { get; private set; }
@@ -103,10 +105,12 @@ namespace Primary.WinFormsApp
 
             Caucion = new Caucion(DiasCaucion, tasaCaucion, TotalACaucionar);
 
-            BuyPriceTarget = SellPrice * (1 + Caucion.Tasa);
-            SellPriceTarget = BuyPrice * (1 - Caucion.Tasa);
+            BuyPriceTarget = SellPrice * ((Caucion.EsColocadora ? 1 : -1) + Caucion.Tasa);
+            SellPriceTarget = BuyPrice * ((Caucion.EsColocadora ? 1 : -1) - Caucion.Tasa);
 
-            SpreadTNA = Math.Abs(((SellPrice/ BuyPrice) - 1m) / DiasCaucion * 365m);
+            if (DiasCaucion != 0) {
+                SpreadTNA = Math.Abs(((SellPrice / BuyPrice) - 1m) / DiasCaucion * 365m);
+            }
 
             if (Caucion.EsColocadora)
             {
@@ -116,6 +120,9 @@ namespace Primary.WinFormsApp
             {
                 ProfitLoss = SellTotalNeto - BuyTotalNeto - Caucion.InteresNeto;
             }
+
+            ProfitLossPercentage = BuyTotalSinComisiones != 0 ? ProfitLoss / BuyTotalSinComisiones : 0;
+
             var caucion = Caucion.TNA / 100m;
             SpreadCaucion = SpreadTNA - caucion;
         }
