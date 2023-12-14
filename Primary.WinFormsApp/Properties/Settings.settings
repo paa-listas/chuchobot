@@ -12,7 +12,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="USDARS" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">376</Value>
+      <Value Profile="(Default)">800</Value>
     </Setting>
     <Setting Name="Comision" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0</Value>
